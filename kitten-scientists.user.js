@@ -7,7 +7,7 @@
 // @include     *kittensgame.com/web/*
 // @include     *kittensgame.com/beta/*
 // @include     *kittensgame.com/alpha/*
-// @version     1.5.0
+// @version     1.5.001
 // @grant       none
 // @copyright   2015, cameroncondry
 // ==/UserScript==
@@ -3377,15 +3377,125 @@ var run = function() {
     // ==============================
 
     var right = $('#rightColumn');
+	//https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleSheet/insertRule
+    function addStylesheetRules (rules) {
+       var styleEl = document.createElement('style');
 
-    var addRule = function (rule) {
-        var sheets = document.styleSheets;
-        sheets[0].insertRule(rule, 0);
-    };
+       // Append <style> element to <head>
+      document.head.appendChild(styleEl);
+
+      // Grab style element's sheet
+      var styleSheet = styleEl.sheet;
+
+      for (var i = 0; i < rules.length; i++) {
+         var j = 1,
+        rule = rules[i],
+        selector = rule[0],
+        propStr = '';
+        // If the second argument of a rule is an array of arrays, correct our variables.
+        if (Array.isArray(rule[1][0])) {
+            rule = rule[1];
+            j = 0;
+        }
+
+        for (var pl = rule.length; j < pl; j++) {
+          var prop = rule[j];
+          propStr += prop[0] + ': ' + prop[1] + (prop[2] ? ' !important' : '') + ';\n';
+        }
+
+         // Insert CSS Rule
+        styleSheet.insertRule(selector + '{' + propStr + '}', styleSheet.cssRules.length);
+      }
+    }
 
     var defaultSelector = 'body[data-ks-style]:not(.scheme_sleek)';
+	var ArrayStyle =[['body', // low priority. make sure it can be covered by the theme
+        ['font-family','monospace'],
+        ['font-size','12px']
+	]
+	,[defaultSelector + ' #game',
+        	// ['font-family','monospace'],
+        	// ['font-size','12px'],
+        	['min-width','1300px'],
+        	['top','32px']
+        ],
 
-    addRule('body {' // low priority. make sure it can be covered by the theme
+    	// [defaultSelector,
+    	//     ['font-family','monospace'],
+    	//     ['font-size','12px']
+    	// ],
+	[defaultSelector + ' .column',
+        	['min-height','inherit'],
+        	['max-width','inherit',true],
+        	['padding','1%'],
+        	['margin','0'],
+        	['overflow-y','auto']
+        ],
+	[defaultSelector + ' #leftColumn',
+		['height','92%'],
+		['width','26%']
+        ],
+	[defaultSelector + ' #midColumn',
+		['margin-top','1%',true],
+		['height','90%'],
+		['width','48%']
+        ]
+	[defaultSelector + ' #rightColumn',
+		['overflow-y','auto'],
+		['height','92%'],
+		['width','19%']
+        ],
+	['body #gamePageContainer #game #rightColumn',
+        	['overflow-y','auto']
+        ],
+
+    // [defaultSelector + ' #gameLog .msg',
+    //     ['display','block']
+    // ],
+	[defaultSelector + ' #gameLog',
+		['overflow-y','hidden,true],
+		['width','100%, true],
+		['padding-top','5px,true]
+        ],
+	[defaultSelector + ' #resContainer .maxRes',
+		['color','#676766']
+        ],
+	[defaultSelector + ' #game .btn',
+		['border-radius','0px'],
+		['font-family','monospace'],
+		['font-size','12px',true],
+		['margin','0 5px 7px 0'],
+		['width','290px']
+        ],
+	[defaultSelector + ' #game .map-viewport',
+		['height','340px'],
+		['max-width','500px'],
+		['overflow','visible']
+        ],
+	[' #game .map-dashboard',
+		['height','120px'],
+		['width','292px']
+        ],['#ks-options ul',
+        	['list-style','none'],
+		['margin','0 0 5px'],
+		['padding','0']
+        ],['#ks-options ul:after',
+		['clear','both;'],
+		['content'," "],
+		['display','block'],
+		['height','0']
+        ],['#ks-options ul li',
+		['display','block'],
+		['float','left'],
+		['width','100%']
+        ],['#ks-options #toggle-list-resources .stockWarn *,'
+        + '#ks-options #toggle-reset-list-resources .stockWarn *',
+		['color',options.stockwarncolor]
+        ],['.right-tab',
+		['height','unset',true]
+        ]];
+	addStylesheetRules(ArrayStyle);
+    /*addRule('body {' // low priority. make sure it can be covered by the theme
         + 'font-family: monospace;'
         + 'font-size: 12px;'
         + '}');
@@ -3490,7 +3600,7 @@ var run = function() {
     
     addRule('.right-tab {'
         + 'height: unset !important;'
-        + '}');
+        + '}');*/
 
     // Local Storage
     // =============
