@@ -7,7 +7,7 @@
 // @include     *kittensgame.com/web/*
 // @include     *kittensgame.com/beta/*
 // @include     *kittensgame.com/alpha/*
-// @version     1.5.002
+// @version     1.5.003
 // @grant       none
 // @copyright   2015, cameroncondry
 // ==/UserScript==
@@ -3431,17 +3431,14 @@ var run = function() {
         	['padding','1%'],
         	['margin','0'],
         	['overflow-y','auto']
-        ],
-	[defaultSelector + ' #leftColumn',
+        ],[defaultSelector + ' #leftColumn',
 		['height','92%'],
 		['width','26%']
-        ],
-	[defaultSelector + ' #midColumn',
+        ],[defaultSelector + ' #midColumn',
 		['margin-top','1%',true],
 		['height','90%'],
 		['width','48%']
-        ]
-	[defaultSelector + ' #rightColumn',
+        ],[defaultSelector + ' #rightColumn',
 		['overflow-y','auto'],
 		['height','92%'],
 		['width','19%']
