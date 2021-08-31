@@ -1,6 +1,6 @@
 // ==UserScript==
-// @name        Kitten Scientists
-// @namespace   http://www.reddit.com/r/kittensgame/comments/34gb2u/kitten_scientists_automation_script/
+// @name        Kitten Scientists JPC
+// @namespace 	https://github.com/bluecombats/cbc-kitten-scientists/edit/master/kitten-scientists.user.js
 // @description Launch Kitten Scientists
 // @include     *bloodrizer.ru/games/kittens/*
 // @include     file:///*kitten-game*
@@ -16,6 +16,7 @@
 // Begin Kitten Scientist's Automation Engine
 // ==========================================
 
+// @namespace   http://www.reddit.com/r/kittensgame/comments/34gb2u/kitten_scientists_automation_script/
 var kg_version = 'Kitten Scientists version 1.5.0';
 var address = '1HDV6VEnXH9m8PJuT4eQD7v8jRnucbneaq';
 
